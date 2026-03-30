@@ -1,15 +1,19 @@
-# ML4SCI DeepLense - Foundation Models & Transformers (GSoC 2026)
-**Candidate:** Hugo Martínez Estévez
-**Project:** Foundation Model for Gravitational Lensing / Exploring Transformers
+# DeepLense: Foundation Model for Gravitational Lensing
 
-## Overview
-This repository contains the evaluation tasks for the DeepLense "Foundation Model" project. Due to local hardware constraints (CUDA driver mismatch on Arch Linux forcing CPU execution), models were trained on a restricted subset of the dataset (800 images/class) for a limited number of epochs. The focus is strictly on architectural correctness and PyTorch pipeline design.
+This repository contains the evaluation tests for the Google Summer of Code 2026 project: **Foundation Model for Gravitational Lensing** under the **ML4SCI** organization.
 
-## 1. Common Test I (`Common_Test_I_Baseline.ipynb`)
-- **Objective:** Multi-class classification baseline.
-- **Implementation:** A baseline CNN with Log-Scale preprocessing to handle the high dynamic range of astronomical images.
+## Project Overview
+The goal is to develop a self-supervised foundation model using Vision Transformers (ViT) to learn robust representations of dark matter substructures. This model serves as a backbone for downstream tasks such as classification, regression, and super-resolution.
 
-## 2. Specific Test V (`Specific_Test_V_Transformers.ipynb`)
-- **Objective:** Implement a Transformer-based model for the same classification task, strictly avoiding Convolutional Neural Networks (CNNs).
-- **Implementation:** A custom PyTorch `MicroViT` (Vision Transformer). The image is mathematically split into patches via `unfold` and projected using a pure `nn.Linear` embedding layer to adhere to the "No CNN" rule. It includes a learnable class token, positional embeddings, and a multi-head Self-Attention encoder.
-- **Results:** Successfully demonstrated the forward pass, loss optimization, and ROC/AUC generation of a pure ViT architecture on CPU.
+## Completed Tasks
+
+### [Specific Test VII: Physics-Informed Neural Networks (PINNs)](./Specific_Test_VII_PINN.ipynb)
+- Implementation of a PINN framework that integrates gravitational lensing physical laws into the loss function.
+- Focus on improving interpretability and physical consistency in mass distribution estimates.
+
+### [Specific Test IX: Foundation Model (MAE & Super-Resolution)](./Specific_Test_IX_Foundation.ipynb)
+- **Task IX.A:** Pre-training a Masked Autoencoder (MAE) on unlabeled lensing data and fine-tuning for multi-class classification (no_sub, cdm, axion). Includes ROC curves and AUC evaluation.
+- **Task IX.B:** Fine-tuning the pre-trained encoder for a Super-Resolution task. Performance evaluated using MSE, SSIM, and PSNR metrics.
+
+## Hardware Note
+Due to local CUDA driver constraints on Arch Linux, models were validated architecturally using CPU execution. Full-scale training is planned for GPU/HPC environments during the GSoC coding period.

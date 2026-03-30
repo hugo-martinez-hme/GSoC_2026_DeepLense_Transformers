@@ -1,4 +1,16 @@
+# Datasets and large files
+*.zip
+*.npy
+*.pth
 dataset_extraido/
+dataset_IX/
+dataset_FM/
+
+# Python/Jupyter
 __pycache__/
 .ipynb_checkpoints/
+.env
 env/
+
+# System
+.DS_Store
